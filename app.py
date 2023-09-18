@@ -30,10 +30,12 @@ def create_app(db_url=None):
     db.init_app(app) # links SQLAlchemy with the app
     migrate = Migrate(app, db) #flask-migrate creates tables
  
+
     api = Api(app)
 
     app.config["JWT_SECRET_KEY"] = "jose"
     jwt = JWTManager(app)
+    
     
     @jwt.token_in_blocklist_loader
     def check_if_token_in_blocklist(jwt_header, jwt_payload):
