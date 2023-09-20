@@ -5,6 +5,8 @@ from flask import Flask, jsonify
 from flask_smorest import Api
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
+from dotenv import load_dotenv
+
 from db import db
 from blocklist import BLOCKLIST
 import models
@@ -17,6 +19,7 @@ from resources.user import blp as UserBlueprint
 
 def create_app(db_url=None):
     app = Flask(__name__) #ensure the variable name is the same as the file name 
+    load_dotenv() #finds the .env file at the root of project and runs it
 
     app.config["PROPAGATE_EXCEPTIONS"] = True #tells flask if theres a problem that happens in flask, propogate it so we can see it in the main app
     app.config["API_TITLE"] = "Stores REST API"
